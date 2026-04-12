@@ -15,7 +15,7 @@ const awards = [
     highlight: "31 selected out of 1,400+ ideas",
     color: 'amber',
     Icon: Trophy,
-    photos: ['https://res.cloudinary.com/dqrpav05c/image/upload/v1775994961/nrtaevwy3g2rtl4xnpbh.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994367/rgxbbxusuh3rwsxlcju6.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775995344/zfapvgwcydyowpkm2vsv.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994711/cbx64riep7auoah3k0ap.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994711/transozjuo4iv7nuqarp.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994712/g7fryastfrk3ypqchenj.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994722/bzqpenpbsr65h0sevldw.svg'],
+    photos: ['https://res.cloudinary.com/dqrpav05c/image/upload/v1776014662/s7ujvzgqlbmzf6zdomna.svg','https://res.cloudinary.com/dqrpav05c/image/upload/v1775994961/nrtaevwy3g2rtl4xnpbh.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994367/rgxbbxusuh3rwsxlcju6.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775995344/zfapvgwcydyowpkm2vsv.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994711/cbx64riep7auoah3k0ap.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994711/transozjuo4iv7nuqarp.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775994712/g7fryastfrk3ypqchenj.svg'],
   },
   {
     title: "Pre-Incubated · Kerala Startup Mission",
@@ -65,7 +65,7 @@ const awards = [
     highlight: "State-level recognition",
     color: 'pink',
     Icon: Star,
-    photos: ['https://res.cloudinary.com/dqrpav05c/image/upload/v1775998975/jtjn0yqponxrwn2fufvj.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775998977/jxynrnnzppv9ttxbddai.svg', 'https://res.cloudinary.com/dqrpav05c/image/upload/v1775998973/cr71mzhafims822px3if.svg'],
+    photos: ['https://res.cloudinary.com/dqrpav05c/image/upload/v1776014169/xjb5yqwgs9weh3qdljvz.svg','https://res.cloudinary.com/dqrpav05c/image/upload/v1775998975/jtjn0yqponxrwn2fufvj.svg'],
   },
   {
     title: "1st Prize Best Panel Performer — Talent Hunt '25",
