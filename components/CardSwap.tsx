@@ -18,6 +18,7 @@ export interface CardSwapProps {
   verticalDistance?: number
   delay?: number
   pauseOnHover?: boolean
+  hoverUplift?: boolean
   skewAmount?: number
   easing?: 'linear' | 'elastic'
   onCardClick?: (index: number) => void
