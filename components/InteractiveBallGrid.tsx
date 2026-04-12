@@ -22,7 +22,7 @@ const BallGroup: React.FC<BallGroupProps> = ({ position, holeDepth, initialState
   const meshRef = useRef<THREE.Mesh>(null)
   const lightRef = useRef<THREE.PointLight>(null)
   const [currentState, setCurrentState] = useState<"in" | "out" | "jumping">(initialState)
-  const animationRef = useRef<gsap.core.Timeline>()
+  const animationRef = useRef<gsap.core.Timeline>(null)
 
   // Inactive material - always glows softly
   const inactiveMaterial = new THREE_IMPL.MeshPhongMaterial({
