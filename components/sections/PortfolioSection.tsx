@@ -8,7 +8,7 @@ const portfolioItems = [
   {
     category: 'Startup · Agritech · Robotics',
     title: 'Agni Robotics',
-    description: "Edge Nativ eAgentic AI Autonomous UGV Robotics solutions from Farmlands to Defence, built to scale.",
+    description: "Founded by Akash Krishna U, an Edge Native Agentic AI Autonomous UGV Robotics solutions from Farmlands to Defence, built to scale.",
     link: 'https://agnirobotics.com',
     tags: ['agnirobotics.com'],
     featured: true,
