@@ -105,14 +105,12 @@ const AwardCard = ({ award }: { award: typeof awards[0] }) => {
   const IconComponent = award.Icon
   return (
     <div className="w-full h-full flex flex-col bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] rounded-xl overflow-hidden">
-      {/* Top bar */}
       <div className={cn('flex items-center gap-2 px-4 py-3 border-b border-white/10', c.bg)}>
         <span className={cn('w-2 h-2 rounded-full flex-shrink-0', c.dot)} />
         <span className={cn('text-xs font-medium tracking-wide truncate', c.text)} style={{ fontFamily: 'var(--font-inter)' }}>
           {award.organizer} · {award.year}
         </span>
       </div>
-      {/* Body */}
       <div className="flex-1 flex flex-col justify-between p-6">
         <div>
           <div className={cn('w-10 h-10 rounded-lg flex items-center justify-center mb-3', c.bg)}>
@@ -150,7 +148,6 @@ const AwardCard = ({ award }: { award: typeof awards[0] }) => {
   )
 }
 
-// Color-matched backgrounds for popup glass effect
 const popupBackgrounds: Record<string, string> = {
   amber: 'from-amber-950/40 via-amber-900/20 to-[#0d0d0d]',
   emerald: 'from-emerald-950/40 via-emerald-900/20 to-[#0d0d0d]',
@@ -173,16 +170,7 @@ const popupBorders: Record<string, string> = {
   indigo: 'border-indigo-500/20',
 }
 
-// Photo Popup Component with liquid glass effect
-function AwardPopup({
-  award,
-  isOpen,
-  onClose
-}: {
-  award: typeof awards[0] | null
-  isOpen: boolean
-  onClose: () => void
-}) {
+function AwardPopup({ award, isOpen, onClose }: { award: typeof awards[0] | null, isOpen: boolean, onClose: () => void }) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
@@ -190,13 +178,8 @@ function AwardPopup({
   const bgGradient = award ? popupBackgrounds[award.color] : popupBackgrounds.amber
   const borderColor = award ? popupBorders[award.color] : popupBorders.amber
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
+  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX)
+  const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX)
 
   const handleTouchEnd = () => {
     if (!award) return
@@ -237,37 +220,23 @@ function AwardPopup({
   if (!isOpen || !award) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
-      onClick={onClose}
-    >
-      {/* Backdrop with color tint */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/85 backdrop-blur-md" />
 
-      {/* Popup with color-matched liquid glass effect - centered on mobile */}
       <div
         className={cn(
           "relative w-full max-w-2xl max-h-[90vh] sm:max-h-[85vh] rounded-2xl",
-          "border",
-          borderColor,
+          "border", borderColor,
           "shadow-[0_30px_60px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)]",
           "animate-in fade-in zoom-in-95 duration-100"
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Solid base background that covers entire popup */}
         <div className={cn("absolute inset-0 rounded-2xl bg-[#0d0d0d]")} />
-
-        {/* Color-matched gradient overlay - fixed to popup bounds */}
         <div className={cn("absolute inset-0 rounded-2xl bg-gradient-to-b pointer-events-none", bgGradient)} />
-
-        {/* Glass shine effect at top */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/[0.06] via-white/[0.02] to-transparent rounded-t-2xl pointer-events-none z-10" />
 
-        {/* Scrollable content container */}
         <div className="relative overflow-y-auto max-h-[90vh] sm:max-h-[85vh] rounded-2xl">
-
-          {/* Close button */}
           <button
             onClick={onClose}
             className={cn(
@@ -278,9 +247,7 @@ function AwardPopup({
             <X className="w-5 h-5 text-white/80" />
           </button>
 
-          {/* Content */}
           <div className="relative p-4 sm:p-6">
-            {/* Header badge */}
             <div className={cn('flex items-center gap-2 mb-3 sm:mb-4', c.bg, 'px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full w-fit border', c.border)}>
               <span className={cn('w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full flex-shrink-0', c.dot)} />
               <span className={cn('text-[10px] sm:text-xs font-medium tracking-wide', c.text)} style={{ fontFamily: 'var(--font-inter)' }}>
@@ -288,7 +255,6 @@ function AwardPopup({
               </span>
             </div>
 
-            {/* Icon */}
             <div className={cn('w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-2 sm:mb-3', c.bg)}>
               <award.Icon className={cn('w-5 h-5 sm:w-6 sm:h-6', c.text)} />
             </div>
@@ -306,7 +272,6 @@ function AwardPopup({
               {award.description}
             </p>
 
-            {/* Highlight badge */}
             <span
               className={cn('inline-flex px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium border mb-4 sm:mb-6', c.text, c.border, c.bg)}
               style={{ fontFamily: 'var(--font-inter)' }}
@@ -314,14 +279,12 @@ function AwardPopup({
               {award.highlight}
             </span>
 
-            {/* Photos section - supports both vertical and horizontal images */}
             <div
               className="relative rounded-lg sm:rounded-xl overflow-hidden bg-black/40 border border-white/[0.08]"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              {/* Image container with dynamic aspect ratio support */}
               <div className="relative w-full min-h-[150px] sm:min-h-[200px] max-h-[250px] sm:max-h-[400px] flex items-center justify-center p-1.5 sm:p-2">
                 {award.photos[currentPhotoIndex] ? (
                   <Image
@@ -338,7 +301,6 @@ function AwardPopup({
                     }}
                   />
                 ) : null}
-                {/* Placeholder shown when image fails to load or is missing */}
                 <div className={cn(
                   "placeholder-img flex flex-col items-center justify-center w-full h-[200px] sm:h-[300px] rounded-md sm:rounded-lg",
                   c.bg, c.border, "border",
@@ -356,7 +318,6 @@ function AwardPopup({
                 </div>
               </div>
 
-              {/* Photo navigation - Desktop */}
               {award.photos.length > 1 && (
                 <>
                   <button
@@ -384,7 +345,6 @@ function AwardPopup({
                 </>
               )}
 
-              {/* Photo indicators */}
               {award.photos.length > 1 && (
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
                   {award.photos.map((_, i) => (
@@ -393,9 +353,7 @@ function AwardPopup({
                       onClick={() => setCurrentPhotoIndex(i)}
                       className={cn(
                         "w-2 h-2 rounded-full transition-all",
-                        i === currentPhotoIndex
-                          ? cn("scale-125", c.dot)
-                          : "bg-white/40 hover:bg-white/60"
+                        i === currentPhotoIndex ? cn("scale-125", c.dot) : "bg-white/40 hover:bg-white/60"
                       )}
                     />
                   ))}
@@ -403,14 +361,11 @@ function AwardPopup({
               )}
             </div>
 
-            {/* Mobile swipe hint + navigation buttons */}
             {award.photos.length > 1 && (
               <div className="flex flex-col items-center gap-3 mt-4">
-                {/* Mobile swipe hint */}
                 <span className="sm:hidden text-xs text-white/40" style={{ fontFamily: 'var(--font-inter)' }}>
                   Swipe to navigate photos
                 </span>
-                {/* Mobile navigation buttons */}
                 <div className="flex sm:hidden justify-center gap-4">
                   <button
                     onClick={prevPhoto}
@@ -462,11 +417,9 @@ export default function HonorsSection() {
   }, [])
 
   const handleCardClick = useCallback((index: number) => {
-    // index is the actual card index (not visual position)
     setSelectedAward(awards[index])
     setClickedCardIndex(index)
     setIsPopupOpen(true)
-    // Pause animation when popup opens
     cardSwapRef.current?.pauseAnimation()
   }, [])
 
@@ -475,22 +428,16 @@ export default function HonorsSection() {
     setIsPopupOpen(false)
     setSelectedAward(null)
     setClickedCardIndex(null)
-    // Bring the clicked card to front, keep it visible for 1.1 seconds, then resume swapping animation
     cardSwapRef.current?.resumeAnimation({
       bringCardToFront: cardToShowAtFront ?? undefined,
       resumeDelay: 1100
     })
   }, [clickedCardIndex])
 
-  const handlePrevCard = useCallback(() => {
-    cardSwapRef.current?.prevCard()
-  }, [])
+  const handlePrevCard = useCallback(() => cardSwapRef.current?.prevCard(), [])
+  const handleNextCard = useCallback(() => cardSwapRef.current?.nextCard(), [])
 
-  const handleNextCard = useCallback(() => {
-    cardSwapRef.current?.nextCard()
-  }, [])
-
-const cardNodes = useMemo(() => awards.map((award, i) => (
+  const cardNodes = useMemo(() => awards.map((award, i) => (
     <AwardCard key={`award-card-${i}`} award={award} />
   )), [])
 
@@ -500,12 +447,10 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
       ref={sectionRef}
       className="relative py-16 sm:py-20 lg:py-32 bg-[#0a0a0a] overflow-hidden"
     >
-      {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-amber-950/10 via-transparent to-transparent" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-        {/* Eyebrow */}
         <div
           className={cn(
             "flex justify-start mb-8 sm:mb-12 transition-all duration-700",
@@ -521,10 +466,8 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
           </span>
         </div>
 
-        {/* Two-column layout */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* LEFT: Description text */}
           <div
             className={cn(
               "flex flex-col justify-center transition-all duration-700",
@@ -544,7 +487,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
               Competing against hundreds of founders and thousands of ideas — these wins reflect not just what I build, but how I think under pressure.
             </p>
 
-            {/* Stats row */}
             <div className="flex gap-6 flex-wrap">
               <div>
                 <p className="text-2xl font-bold text-white" style={{ fontFamily: 'var(--font-garet), system-ui' }}>8+</p>
@@ -562,7 +504,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
               </div>
             </div>
 
-            {/* Luminous hint capsule with navigation buttons */}
             <div className="mt-6 flex items-center gap-3 flex-wrap">
               <span
                 className={cn(
@@ -580,7 +521,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
                 </span>
               </span>
 
-              {/* PC navigation buttons - mini buttons next to capsule */}
               <div className="hidden lg:flex items-center gap-2">
                 <button
                   onMouseDown={(e) => { e.preventDefault(); handlePrevCard(); }}
@@ -604,7 +544,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
             </div>
           </div>
 
-          {/* RIGHT: CardSwap — positioned like vue-bits (bottom-right anchor) */}
           <div
             className={cn(
               "relative transition-all duration-700 delay-200",
@@ -627,7 +566,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
               onCardClick={handleCardClick}
             />
 
-            {/* Mobile navigation buttons */}
             <div className="flex lg:hidden justify-center gap-4 mt-4 absolute -bottom-16 left-1/2 -translate-x-1/2">
               <button
                 onTouchStart={(e) => { e.stopPropagation(); handlePrevCard(); }}
@@ -655,7 +593,6 @@ const cardNodes = useMemo(() => awards.map((award, i) => (
         </div>
       </div>
 
-      {/* Award Popup */}
       <AwardPopup
         award={selectedAward}
         isOpen={isPopupOpen}
