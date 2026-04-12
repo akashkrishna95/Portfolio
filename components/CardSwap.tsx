@@ -157,7 +157,7 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap({
 
     const backSlot = makeSlot(total - 1, cardDistance, verticalDistance, total)
     tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`)
-    tl.call(() => gsap.set(elFront, { zIndex: backSlot.zIndex }), undefined, 'return')
+    tl.call(() => { gsap.set(elFront, { zIndex: backSlot.zIndex }) }, undefined, 'return')
     tl.set(elFront, { x: backSlot.x, z: backSlot.z }, 'return')
     tl.to(elFront, { y: backSlot.y, duration: config.durReturn, ease: config.ease }, 'return')
   }, [cardDistance, verticalDistance, total, config])
