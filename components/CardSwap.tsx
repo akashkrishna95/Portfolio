@@ -301,10 +301,9 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap({
 
   useImperativeHandle(ref, () => ({
     nextCard: () => {
-      // 1. ADD THIS EXACT LINE to prevent double-skips
+      // 1. Prevent double-click skips
       if (isAnimatingRef.current) return
       
-      // Kill any running animation immediately
       tlRef.current?.kill()
       tlRef.current = null
       isAnimatingRef.current = false
@@ -344,13 +343,9 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap({
       })
     },
     prevCard: () => {
-      // 2. ADD THIS EXACT LINE HERE TOO
+      // 2. Prevent double-click skips
       if (isAnimatingRef.current) return
 
-      // Kill any running animation immediately
-      tlRef.current?.kill()
-      tlRef.current = null
-      // ... (keep the rest of your prevCard code exactly as is)
       tlRef.current?.kill()
       tlRef.current = null
       isAnimatingRef.current = false
