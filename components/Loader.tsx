@@ -154,6 +154,18 @@ export default function Loader({ onComplete }: LoaderProps) {
         </div>
       </div>
 
+      {/* BOTTOM TEXT */}
+      <div 
+        className={cn(
+          "absolute bottom-8 w-full text-center transition-all duration-300",
+          (isComplete || isMovingLogo) && "opacity-0"
+        )}
+      >
+        <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/40 font-light">
+          For the best experience— use desktop.
+        </p>
+      </div>
+
       {/* Animated background elements */}
       {!isMovingLogo && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
