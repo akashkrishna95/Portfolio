@@ -502,6 +502,11 @@ export default function HonorsSection() {
                 <p className="text-2xl font-bold text-white" style={{ fontFamily: 'var(--font-garet), system-ui' }}>State</p>
                 <p className="text-xs text-white/40 mt-1" style={{ fontFamily: 'var(--font-inter)' }}>Level recognition</p>
               </div>
+              <div className="w-px bg-white/10 hidden sm:block" />
+              <div>
+                <p className="text-2xl font-bold text-white" style={{ fontFamily: 'var(--font-garet), system-ui' }}>50K+</p>
+                <p className="text-xs text-white/40 mt-1" style={{ fontFamily: 'var(--font-inter)' }}>Bootstrapped</p>
+              </div>
             </div>
 
             <div className="mt-6 flex items-center gap-3 flex-wrap">
