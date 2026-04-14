@@ -162,7 +162,7 @@ export default function Loader({ onComplete }: LoaderProps) {
         )}
       >
         <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/40 font-light">
-          For the best experience— use desktop.
+          For best experience— use desktop.
         </p>
       </div>
 
