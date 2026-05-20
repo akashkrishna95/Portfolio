@@ -82,8 +82,10 @@ export default function Navbar() {
       <a
         href="#hero"
         onClick={(e) => handleNavClick(e, '#hero')}
+        onContextMenu={(e) => e.preventDefault()}
+        style={{ WebkitTouchCallout: 'none' }}
         className={cn(
-          "fixed top-4 left-4 z-50 transition-all duration-500",
+          "fixed top-4 left-4 z-50 transition-all duration-500 select-none",
           isScrolled ? "top-3" : "top-6"
         )}
       >
@@ -92,7 +94,8 @@ export default function Navbar() {
           alt="Akash Krishna U"
           width={56}
           height={56}
-          className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
+          draggable={false}
+          className="w-12 h-12 sm:w-14 sm:h-14 object-contain pointer-events-none"
           priority
           loading="eager"
         />
