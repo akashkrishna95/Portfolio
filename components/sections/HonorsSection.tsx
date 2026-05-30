@@ -451,21 +451,6 @@ export default function HonorsSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-        <div
-          className={cn(
-            "flex justify-start mb-8 sm:mb-12 transition-all duration-700",
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          )}
-        >
-          <span
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs sm:text-sm text-white/60"
-            style={{ fontFamily: 'var(--font-inter)' }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Honors
-          </span>
-        </div>
-
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           <div
