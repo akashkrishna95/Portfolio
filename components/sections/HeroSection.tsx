@@ -12,33 +12,105 @@ const InteractiveBallGrid = dynamic(() => import('@/components/InteractiveBallGr
   )
 })
 
+// ─── Word List + Gradient Per Domain ─────────────────────────────────────────
 const rotatingWords = [
-  { word: 'Agritech', gradient: 'gradient-agritech' },
-  { word: 'Defence', gradient: 'gradient-defence' },
-  { word: 'Forestry', gradient: 'gradient-forestry' },
-  { word: 'Sustainability', gradient: 'gradient-sustainability' },
-  { word: 'Border Patrolling', gradient: 'gradient-border' },
-  { word: 'Wildlife Protection', gradient: 'gradient-wildlife' },
+  { word: 'Agritech',             from: '#a8ff78', to: '#78ffd6' }, 
+  { word: 'Defence',              from: '#ed1515', to: '#ff6464' }, 
+  { word: 'Forestry',             from: '#43e97b', to: '#38f9d7' }, 
+  { word: 'Sustainability',      from: '#f7971e', to: '#ffd200' },
 ]
 
-export default function HeroSection() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
+// ─── Optimized Typewriter Component ──────────────────────────────────────────
+function TypewriterWord() {
+  const [displayed, setDisplayed] = useState('')
+  const [wordIndex, setWordIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [cursorVisible, setCursorVisible] = useState(true)
 
+  // Cursor blink interval (runs independently of typing speed)
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true)
-      setTimeout(() => {
-        setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length)
-        setIsAnimating(false)
-      }, 500)
-    }, 3000)
-
-    return () => clearInterval(interval)
+    const blinkInterval = setInterval(() => {
+      setCursorVisible((prev) => !prev)
+    }, 500)
+    return () => clearInterval(blinkInterval)
   }, [])
 
-  const currentWord = rotatingWords[currentWordIndex]
+  // Typing engine
+  useEffect(() => {
+    const fullWord = rotatingWords[wordIndex].word
+    let timer: ReturnType<typeof setTimeout>
 
+    if (isDeleting) {
+      if (displayed === '') {
+        setIsDeleting(false)
+        setWordIndex((prev) => (prev + 1) % rotatingWords.length)
+      } else {
+        // Delete speed
+        timer = setTimeout(() => {
+          setDisplayed(displayed.slice(0, -1))
+        }, 40)
+      }
+    } else {
+      if (displayed === fullWord) {
+        // Pause before deleting
+        timer = setTimeout(() => {
+          setIsDeleting(true)
+        }, 2000)
+      } else {
+        // Typing speed with slight random human jitter
+        timer = setTimeout(() => {
+          setDisplayed(fullWord.slice(0, displayed.length + 1))
+        }, 80 + Math.random() * 50)
+      }
+    }
+
+    return () => clearTimeout(timer)
+  }, [displayed, isDeleting, wordIndex])
+
+  const { from, to } = rotatingWords[wordIndex]
+
+  return (
+    <span className="inline-flex items-end whitespace-nowrap">
+      {/* The gradient word */}
+      <span
+        style={{
+          fontFamily: '"Montserrat", sans-serif',
+          fontWeight: 700,
+          backgroundImage: `linear-gradient(90deg, ${from}, ${to})`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          transition: 'background-image 0.5s ease',
+          lineHeight: '1.1em',
+          minWidth: displayed === '' ? '2px' : 'auto',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {/* Replaces normal spaces with non-breaking spaces (\u00A0) */}
+        {displayed.replace(/ /g, '\u00A0')}
+      </span>
+
+      {/* Bulletproof Text-Based Cursor */}
+      <span
+        style={{
+          fontFamily: '"Montserrat", sans-serif',
+          fontWeight: 300,
+          color: from, // Color the text directly
+          opacity: cursorVisible ? 1 : 0,
+          transition: 'opacity 0.1s, color 0.5s ease',
+          lineHeight: '1.1em',
+          marginLeft: '2px',
+          transform: 'translateY(-2px)' // Minor vertical adjustment so it aligns perfectly with text
+        }}
+      >
+        |
+      </span>
+    </span>
+  )
+}
+
+// ─── HeroSection ─────────────────────────────────────────────────────────────
+export default function HeroSection() {
   return (
     <section
       id="hero"
@@ -95,19 +167,7 @@ export default function HeroSection() {
                 <span className="text-white" style={{ fontFamily: '"Montserrat", sans-serif' }}>Next-Gen Robotics</span>
                 <br />
                 <span className="text-white" style={{ fontFamily: '"Montserrat", sans-serif' }}>for </span>
-                <span
-                  className={cn(
-                    "inline-block transition-all duration-500",
-                    currentWord.gradient,
-                    isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-                  )}
-                  style={{
-                    fontFamily: '"Montserrat", sans-serif',
-                    lineHeight: '1.1em',
-                  }}
-                >
-                  {currentWord.word}
-                </span>
+                <TypewriterWord />
               </h1>
 
               {/* CTAs - Same line on mobile with smaller buttons */}
@@ -122,7 +182,11 @@ export default function HeroSection() {
                     e.preventDefault()
                     document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' })
                   }}
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2.5 sm:py-4 rounded-full bg-white text-[#000000] text-xs sm:text-base font-semibold transition-all duration-300 hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                  className={cn(
+                    "group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2.5 sm:py-4 rounded-full",
+                    "bg-white text-[#000000] text-xs sm:text-base font-semibold transition-all duration-300",
+                    "hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                  )}
                   style={{ fontFamily: 'var(--font-inter)' }}
                 >
                   <span className="whitespace-nowrap">Explore My Work</span>
@@ -136,7 +200,11 @@ export default function HeroSection() {
                     e.preventDefault()
                     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
                   }}
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2.5 sm:py-4 rounded-full border border-white/20 text-white text-xs sm:text-base font-medium transition-all duration-300 hover:bg-white/[0.05] hover:border-white/40"
+                  className={cn(
+                    "group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2.5 sm:py-4 rounded-full",
+                    "border border-white/20 text-white text-xs sm:text-base font-medium transition-all duration-300",
+                    "hover:bg-white/[0.05] hover:border-white/40"
+                  )}
                   style={{ fontFamily: 'var(--font-inter)' }}
                 >
                   <span className="whitespace-nowrap">{"Let's Connect"}</span>
