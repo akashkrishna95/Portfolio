@@ -13,6 +13,11 @@ const InteractiveBallGrid = dynamic(() => import('@/components/InteractiveBallGr
 })
 
 // ─── Word List + Gradient Per Domain ─────────────────────────────────────────
+interface RotatingWord {
+  word: string;
+  colors: string[];
+}
+
 const rotatingWords = [
 { word: 'INDIA',                colors: ['#FF9933', '#FFFFFF', '#138808'] },
   { word: 'Agritech',             from: '#a8ff78', to: '#78ffd6' }, 
