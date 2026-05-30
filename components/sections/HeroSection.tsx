@@ -18,6 +18,7 @@ const rotatingWords = [
   { word: 'Defence',              from: '#ed1515', to: '#ff6464' }, 
   { word: 'Forestry',             from: '#43e97b', to: '#38f9d7' }, 
   { word: 'Sustainability',      from: '#f7971e', to: '#ffd200' },
+{ word: 'INDIA',                colors: ['#FF9933', '#FFFFFF', '#138808'] },
 ]
 
 // ─── Optimized Typewriter Component ──────────────────────────────────────────
