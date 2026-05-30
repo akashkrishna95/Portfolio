@@ -155,7 +155,7 @@ export default function HeroSection() {
 
               {/* Main Headline */}
               <h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight opacity-0 animate-slide-up"
+                className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight opacity-0 animate-slide-up"
                 style={{
                   fontFamily: 'var(--font-garet), system-ui, sans-serif',
                   animationDelay: '0.4s',
