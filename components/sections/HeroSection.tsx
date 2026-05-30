@@ -28,7 +28,7 @@ function TypewriterWord() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [cursorVisible, setCursorVisible] = useState(true)
 
-  // Cursor blink interval (runs independently of typing speed)
+  // Cursor blink interval
   useEffect(() => {
     const blinkInterval = setInterval(() => {
       setCursorVisible((prev) => !prev)
@@ -46,19 +46,16 @@ function TypewriterWord() {
         setIsDeleting(false)
         setWordIndex((prev) => (prev + 1) % rotatingWords.length)
       } else {
-        // Delete speed
         timer = setTimeout(() => {
           setDisplayed(displayed.slice(0, -1))
         }, 40)
       }
     } else {
       if (displayed === fullWord) {
-        // Pause before deleting
         timer = setTimeout(() => {
           setIsDeleting(true)
         }, 2000)
       } else {
-        // Typing speed with slight random human jitter
         timer = setTimeout(() => {
           setDisplayed(fullWord.slice(0, displayed.length + 1))
         }, 80 + Math.random() * 50)
@@ -68,7 +65,13 @@ function TypewriterWord() {
     return () => clearTimeout(timer)
   }, [displayed, isDeleting, wordIndex])
 
-  const { from, to } = rotatingWords[wordIndex]
+  const { colors } = rotatingWords[wordIndex]
+
+  // CHANGED: Smarter gradient builder. 
+  // If it's the India flag (3 colors), it maps them perfectly to 0%, 50%, 100%
+  const gradientString = colors.length === 3 
+    ? `linear-gradient(90deg, ${colors[0]} 0%, ${colors[1]} 50%, ${colors[2]} 100%)`
+    : `linear-gradient(90deg, ${colors[0]}, ${colors[1]})`
 
   return (
     <span className="inline-flex items-end whitespace-nowrap">
@@ -77,7 +80,7 @@ function TypewriterWord() {
         style={{
           fontFamily: '"Montserrat", sans-serif',
           fontWeight: 700,
-          backgroundImage: `linear-gradient(90deg, ${from}, ${to})`,
+          backgroundImage: gradientString, // Using the new smart gradient string
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -87,7 +90,6 @@ function TypewriterWord() {
           whiteSpace: 'nowrap',
         }}
       >
-        {/* Replaces normal spaces with non-breaking spaces (\u00A0) */}
         {displayed.replace(/ /g, '\u00A0')}
       </span>
 
@@ -96,12 +98,12 @@ function TypewriterWord() {
         style={{
           fontFamily: '"Montserrat", sans-serif',
           fontWeight: 300,
-          color: from, // Color the text directly
+          color: colors[0], 
           opacity: cursorVisible ? 1 : 0,
           transition: 'opacity 0.1s, color 0.5s ease',
           lineHeight: '1.1em',
           marginLeft: '2px',
-          transform: 'translateY(-2px)' // Minor vertical adjustment so it aligns perfectly with text
+          transform: 'translateY(-2px)' 
         }}
       >
         |
