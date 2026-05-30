@@ -14,11 +14,11 @@ const InteractiveBallGrid = dynamic(() => import('@/components/InteractiveBallGr
 
 // ─── Word List + Gradient Per Domain ─────────────────────────────────────────
 const rotatingWords = [
+{ word: 'INDIA',                colors: ['#FF9933', '#FFFFFF', '#138808'] },
   { word: 'Agritech',             from: '#a8ff78', to: '#78ffd6' }, 
   { word: 'Defence',              from: '#ed1515', to: '#ff6464' }, 
   { word: 'Forestry',             from: '#43e97b', to: '#38f9d7' }, 
   { word: 'Sustainability',      from: '#f7971e', to: '#ffd200' },
-{ word: 'INDIA',                colors: ['#FF9933', '#FFFFFF', '#138808'] },
 ]
 
 // ─── Optimized Typewriter Component ──────────────────────────────────────────
