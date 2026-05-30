@@ -140,7 +140,7 @@ export default function HeroSection() {
                   className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-8 py-2.5 sm:py-4 rounded-full border border-white/20 text-white text-xs sm:text-base font-medium transition-all duration-300 hover:bg-white/[0.05] hover:border-white/40"
                   style={{ fontFamily: 'var(--font-inter)' }}
                 >
-                  <span className="whitespace-nowrap">{"Let's Build Together"}</span>
+                  <span className="whitespace-nowrap">{"Let's Connect"}</span>
                 </a>
               </div>
             </div>

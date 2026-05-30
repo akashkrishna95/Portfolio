@@ -74,12 +74,6 @@ export default function Loader({ onComplete }: LoaderProps) {
           }}
         />
 
-        <p
-          className="absolute bottom-8 w-full text-center text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white/40 font-light"
-          style={{ fontFamily: 'var(--font-inter)' }}
-        >
-          For best experience— use desktop.
-        </p>
       </div>
     </div>
   )
