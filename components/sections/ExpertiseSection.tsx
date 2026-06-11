@@ -118,7 +118,6 @@ const expertiseData = [
     ),
     details: ['Idea Validation', 'Pitch Decks', 'Business Modelling', 'Startup Strategy', 'YIP 8.0 Winner'],
     icon: Presentation,
-    color: 'violet',
     year: 'Dec 2025 – Present',
   },
   {
@@ -235,7 +234,6 @@ export default function CommandArc() {
       >
         <div className="w-full max-w-3xl flex flex-col items-center text-center pointer-events-none">
           
-          {/* Header Section elevated with negative top margins and extra bottom spacing */}
           <div className="-mt-10 md:-mt-16 mb-14 md:mb-20">
             <h2 
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
@@ -251,7 +249,6 @@ export default function CommandArc() {
             </p>
           </div>
 
-          {/* Active Content Projection */}
           <div className="relative w-full flex justify-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -306,7 +303,6 @@ export default function CommandArc() {
         </div>
       </motion.div>
 
-      {/* --- BOTTOM: THE COMMAND ARC (WHEEL) --- */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-end justify-center">
         
         <motion.div 
@@ -382,7 +378,6 @@ export default function CommandArc() {
           })}
         </motion.div>
 
-        {/* HUD Elements overlaying the wheel (Desktop only) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[65%] pointer-events-none hidden md:flex flex-col items-center">
           <motion.div 
             className="w-px h-16 mb-4 rounded-full"
