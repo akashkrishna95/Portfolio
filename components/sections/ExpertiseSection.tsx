@@ -178,7 +178,8 @@ const themeColors: Record<string, string> = {
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
-const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 };
+// Fixed with strict 'as const' literal type casting for Framer Motion 12 compatibility
+const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 } as const;
 
 export default function CommandArc() {
   const [activeIndex, setActiveIndex] = useState(0); 
@@ -221,6 +222,7 @@ export default function CommandArc() {
         transition={{ duration: 1.2, ease: "easeInOut" }}
       />
 
+      {/* --- TOP: THE DATA DISPLAY --- */}
       <motion.div 
         className="relative w-full flex-1 flex flex-col items-center pt-[22vh] md:pt-24 px-4 sm:px-8 z-10 pb-[250px] cursor-grab active:cursor-grabbing overflow-y-auto custom-scrollbar"
         drag="x"
@@ -303,6 +305,7 @@ export default function CommandArc() {
         </div>
       </motion.div>
 
+      {/* --- BOTTOM: THE COMMAND ARC (WHEEL) --- */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-end justify-center">
         
         <motion.div 
@@ -378,6 +381,7 @@ export default function CommandArc() {
           })}
         </motion.div>
 
+        {/* HUD Elements overlaying the wheel (Desktop only) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[65%] pointer-events-none hidden md:flex flex-col items-center">
           <motion.div 
             className="w-px h-16 mb-4 rounded-full"
