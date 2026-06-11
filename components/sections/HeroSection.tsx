@@ -18,12 +18,13 @@ interface RotatingWord {
   colors: string[];
 }
 
-const rotatingWords = [
-{ word: 'INDIA',                colors: ['#FF9933', '#FFFFFF', '#138808'] },
-  { word: 'Agritech',             from: '#a8ff78', to: '#78ffd6' }, 
-  { word: 'Defence',              from: '#ed1515', to: '#ff6464' }, 
-  { word: 'Forestry',             from: '#43e97b', to: '#38f9d7' }, 
-  { word: 'Sustainability',      from: '#f7971e', to: '#ffd200' },
+// FIX: Changed all items to use the 'colors' array instead of 'from' and 'to'
+const rotatingWords: RotatingWord[] = [
+  { word: 'Agritech',       colors: ['#a8ff78', '#78ffd6'] }, 
+  { word: 'Defence',        colors: ['#ed1515', '#ff6464'] }, 
+  { word: 'Forestry',       colors: ['#43e97b', '#38f9d7'] }, 
+  { word: 'INDIA',          colors: ['#FF9933', '#FFFFFF', '#138808'] },
+  { word: 'Sustainability', colors: ['#f7971e', '#ffd200'] },
 ]
 
 // ─── Optimized Typewriter Component ──────────────────────────────────────────
@@ -72,7 +73,7 @@ function TypewriterWord() {
 
   const { colors } = rotatingWords[wordIndex]
 
-  // CHANGED: Smarter gradient builder. 
+  // Smarter gradient builder. 
   // If it's the India flag (3 colors), it maps them perfectly to 0%, 50%, 100%
   const gradientString = colors.length === 3 
     ? `linear-gradient(90deg, ${colors[0]} 0%, ${colors[1]} 50%, ${colors[2]} 100%)`
@@ -85,7 +86,7 @@ function TypewriterWord() {
         style={{
           fontFamily: '"Montserrat", sans-serif',
           fontWeight: 700,
-          backgroundImage: gradientString, // Using the new smart gradient string
+          backgroundImage: gradientString,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
