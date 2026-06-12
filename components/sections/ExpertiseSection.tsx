@@ -178,10 +178,7 @@ const themeColors: Record<string, string> = {
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
-<<<<<<< HEAD
-=======
 // Fixed with strict 'as const' literal type casting for Framer Motion 12 compatibility
->>>>>>> 6818bd6add49c7a5fc63479d48ca25df6ef36e80
 const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 } as const;
 
 export default function CommandArc() {
