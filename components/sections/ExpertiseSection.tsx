@@ -213,7 +213,6 @@ export default function CommandArc() {
   if (!isClient) return null; 
 
   return (
-    {/* Removed 'overscroll-none' so you can comfortably scroll down the page */}
     <section id="expertise" className="relative h-[100svh] md:h-[100dvh] w-full bg-[#020202] overflow-hidden flex flex-col selection:bg-white/20 font-sans">
       
       <motion.div
@@ -223,7 +222,6 @@ export default function CommandArc() {
       />
 
       <motion.div 
-        {/* Removed 'touch-pan-y'. Framer motion handles standard scrolling natively on drag="x" */}
         className="relative w-full flex-1 flex flex-col items-center pt-[140px] md:pt-24 px-4 sm:px-8 z-10 pb-20 md:pb-[250px] cursor-grab active:cursor-grabbing"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
