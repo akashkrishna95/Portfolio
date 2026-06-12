@@ -178,7 +178,6 @@ const themeColors: Record<string, string> = {
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
-// Fixed with strict 'as const' literal type casting for Framer Motion 12 compatibility
 const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 } as const;
 
 export default function CommandArc() {
@@ -214,7 +213,8 @@ export default function CommandArc() {
   if (!isClient) return null; 
 
   return (
-    <section id="expertise" className="relative h-[100dvh] w-full bg-[#020202] overflow-hidden flex flex-col selection:bg-white/20 font-sans">
+    // STRICT FIX 1: h-[100svh] prevents the container from resizing when mobile browser UI shifts
+    <section id="expertise" className="relative h-[100svh] md:h-[100dvh] w-full bg-[#020202] overflow-hidden flex flex-col selection:bg-white/20 font-sans overscroll-none">
       
       <motion.div
         className="absolute inset-0 z-0 pointer-events-none"
@@ -222,10 +222,9 @@ export default function CommandArc() {
         transition={{ duration: 1.2, ease: "easeInOut" }}
       />
 
-      {/* --- TOP: THE DATA DISPLAY --- */}
+      {/* STRICT FIX 2: Fixed pixel padding (pt-[140px]) replaces dynamic vh so text never jumps relative to the arc */}
       <motion.div 
-        // NOTE: Adjusted pb-24 md:pb-[250px] and added touch-pan-x to completely lock vertical scrolling
-        className="relative w-full flex-1 flex flex-col items-center pt-[22vh] md:pt-24 px-4 sm:px-8 z-10 pb-24 md:pb-[250px] cursor-grab active:cursor-grabbing touch-pan-x"
+        className="relative w-full flex-1 flex flex-col items-center pt-[140px] md:pt-24 px-4 sm:px-8 z-10 pb-20 md:pb-[250px] cursor-grab active:cursor-grabbing touch-pan-y"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.2}
