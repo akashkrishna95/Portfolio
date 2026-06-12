@@ -118,7 +118,6 @@ const expertiseData = [
     ),
     details: ['Idea Validation', 'Pitch Decks', 'Business Modelling', 'Startup Strategy', 'YIP 8.0 Winner'],
     icon: Presentation,
-    color: 'violet',
     year: 'Dec 2025 – Present',
   },
   {
@@ -179,7 +178,7 @@ const themeColors: Record<string, string> = {
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
-const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 };
+const wheelPhysics = { type: "spring", stiffness: 90, damping: 20, mass: 1.2 } as const;
 
 export default function CommandArc() {
   const [activeIndex, setActiveIndex] = useState(0); 
@@ -223,7 +222,8 @@ export default function CommandArc() {
       />
 
       <motion.div 
-        className="relative w-full flex-1 flex flex-col items-center pt-[22vh] md:pt-24 px-4 sm:px-8 z-10 pb-[250px] cursor-grab active:cursor-grabbing overflow-y-auto custom-scrollbar"
+        // NOTE: Adjusted pb-24 md:pb-[250px] and added touch-pan-x to completely lock vertical scrolling
+        className="relative w-full flex-1 flex flex-col items-center pt-[22vh] md:pt-24 px-4 sm:px-8 z-10 pb-24 md:pb-[250px] cursor-grab active:cursor-grabbing touch-pan-x"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.2}
@@ -235,7 +235,6 @@ export default function CommandArc() {
       >
         <div className="w-full max-w-3xl flex flex-col items-center text-center pointer-events-none">
           
-          {/* Header Section elevated with negative top margins and extra bottom spacing */}
           <div className="-mt-10 md:-mt-16 mb-14 md:mb-20">
             <h2 
               className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
@@ -251,7 +250,6 @@ export default function CommandArc() {
             </p>
           </div>
 
-          {/* Active Content Projection */}
           <div className="relative w-full flex justify-center">
             <AnimatePresence mode="wait">
               <motion.div
